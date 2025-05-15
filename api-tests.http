@@ -1,0 +1,169 @@
+### ЗАМЕНИТЕ IP НА СВОЙ
+### Клиент: Регистрация
+POST http://147.78.64.184:8000/api/register/
+Content-Type: application/json
+
+{
+  "username": "client1",
+  "email": "client1@example.com",
+  "password": "clientpass123"
+}
+
+
+### Клиент: Логин
+POST http://147.78.64.184:8000/api/login/
+Content-Type: application/json
+
+{
+  "username": "client1",
+  "password": "clientpass123"
+}
+
+
+### Клиент: Получение списка товаров
+GET http://147.78.64.184:8000/api/products/
+Content-Type: application/json
+
+
+### Клиент: Получение деталей товара (id = 1)
+GET http://147.78.64.184:8000/api/products/1/
+Content-Type: application/json
+
+
+### Клиент: Добавление товара в корзину
+POST http://147.78.64.184:8000/api/cart/
+Content-Type: application/json
+Authorization: Token <YOUR_CLIENT_TOKEN>
+
+{
+  "product_id": 1,
+  "shop_id": 1,
+  "price": 110000,
+  "quantity": 1
+}
+
+
+### Клиент: Получение корзины
+GET http://147.78.64.184:8000/api/cart/
+Content-Type: application/json
+Authorization: Token <YOUR_CLIENT_TOKEN>
+
+
+### Клиент: Удаление товара из корзины (item_id = 1)
+DELETE http://147.78.64.184:8000/api/cart/
+Content-Type: application/json
+Authorization: Token <YOUR_CLIENT_TOKEN>
+
+{
+  "item_id": 1
+}
+
+
+### Клиент: Подтверждение заказа
+POST http://147.78.64.184:8000/api/order/confirm/
+Content-Type: application/json
+Authorization: Token <YOUR_CLIENT_TOKEN>
+
+{
+  "delivery_address": "ул. Ленина, д. 10, кв. 5"
+}
+
+
+### Клиент: Получение списка заказов
+GET http://147.78.64.184:8000/api/orders/
+Content-Type: application/json
+Authorization: Token <YOUR_CLIENT_TOKEN>
+
+
+### Клиент: Получение деталей заказа (id = 1)
+GET http://147.78.64.184:8000/api/orders/1/
+Content-Type: application/json
+Authorization: Token <YOUR_CLIENT_TOKEN>
+
+
+### Клиент: Добавление контакта
+POST http://147.78.64.184:8000/api/contacts/
+Content-Type: application/json
+Authorization: Token <YOUR_CLIENT_TOKEN>
+
+{
+  "contact_type": "phone",
+  "value": "+79161234567"
+}
+
+
+### Клиент: Удаление контакта (id = 1)
+DELETE http://147.78.64.184:8000/api/contacts/1/
+Content-Type: application/json
+Authorization: Token <YOUR_CLIENT_TOKEN>
+
+
+### Клиент: Запрос на восстановление пароля
+POST http://147.78.64.184:8000/api/password-reset/
+Content-Type: application/json
+
+{
+  "email": "client1@example.com"
+}
+
+
+### Клиент: Подтверждение сброса пароля
+POST http://147.78.64.184:8000/api/password-reset-confirm/
+Content-Type: application/json
+
+{
+  "uid": "<UID_FROM_RESET_EMAIL>",
+  "token": "<TOKEN_FROM_RESET_EMAIL>",
+  "new_password": "newclientpass123"
+}
+
+
+
+
+### Поставщик: Регистрация
+POST http://147.78.64.184:8000/api/register/
+Content-Type: application/json
+
+{
+  "username": "supplier1",
+  "email": "supplier1@example.com",
+  "password": "supplierpass123"
+}
+
+
+### Поставщик: Логин
+POST http://147.78.64.184:8000/api/login/
+Content-Type: application/json
+
+{
+  "username": "supplier1",
+  "password": "supplierpass123"
+}
+
+
+### Поставщик: Обновление прайса (по желанию)
+PUT http://147.78.64.184:8000/api/supplier/update-price/
+Content-Type: application/json
+Authorization: Token <YOUR_SUPPLIER_TOKEN>
+
+{
+  "product_id": 1,
+  "new_price": 105000,
+  "quantity": 12
+}
+
+
+### Поставщик: Переключение приёма заказов (по желанию)
+POST http://147.78.64.184:8000/api/supplier/toggle-orders/
+Content-Type: application/json
+Authorization: Token <YOUR_SUPPLIER_TOKEN>
+
+{
+  "accept_orders": true
+}
+
+
+### Поставщик: Получение списка заказов для поставщика (по желанию)
+GET http://147.78.64.184:8000/api/supplier/orders/
+Content-Type: application/json
+Authorization: Token <YOUR_SUPPLIER_TOKEN>

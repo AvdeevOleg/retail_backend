@@ -1,0 +1,31 @@
+# Виртуальное окружение
+venv/
+env/
+ENV/
+
+# Кеши Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# База данных
+db.sqlite3
+
+# Файлы логов
+*.log
+
+# Настройки IDE
+.vscode/
+.idea/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Файлы окружения и секреты
+.env
+.env.*
+
+# Миграции
+**/migrations/*.py
+!**/migrations/__init__.py
