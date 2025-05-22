@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: gunicorn retail_backend.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - sqlite_data:/app/db.sqlite3
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    command: celery -A retail_backend worker --loglevel=info
+    volumes:
+      - .:/app
+      - sqlite_data:/app/db.sqlite3
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - web
+
+  celery-beat:
+    build: .
+    command: celery -A retail_backend beat --loglevel=info
+    volumes:
+      - .:/app
+      - sqlite_data:/app/db.sqlite3
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - web
+
+volumes:
+  sqlite_data: {}
